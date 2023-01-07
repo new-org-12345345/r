@@ -27,8 +27,8 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Commit files
       run: |
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "jawadneeme1@gmail.com"
+        git config --local user.name "jaowl2o1"
         touch test.txt
         echo "test" > test.txt
         git add .
