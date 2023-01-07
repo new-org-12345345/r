@@ -1,0 +1,20 @@
+name: My Action
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, edited, closed, reopened, synchronize, ready_for_review, locked, unlocked, review_requested, review_request_removed, labeled, unlabeled, assigned, unassigned, opened, edited, closed, reopened, synchronize, ready_for_review, locked, unlocked, review_requested, review_request_removed, labeled, unlabeled, assigned, unassigned]
+
+permissions:
+  issues: write
+
+jobs:
+  my-action:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X PUT \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/new-org-12345345/clean/issues/1/lock \
+            -d '{"lock_reason":"off-topic"}'
