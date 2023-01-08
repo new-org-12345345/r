@@ -24,18 +24,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+        persist-credentials: true
+        fetch-depth: 0
     - name: Commit files
       run: |
         git config --local user.email "jawadneeme1@gmail.com"
         git config --local user.name "jaowl2o1"
-        touch test.txt
-        echo "test" > test.txt
+        echo "test" >> README.md
         git add .
         git commit -a -m "Add changes"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        branch: main
