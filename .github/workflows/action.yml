@@ -7,6 +7,7 @@ on:
 
 permissions:
   issues: write
+  contents: write
 
 jobs:
   my-action:
@@ -18,3 +19,22 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             https://api.github.com/repos/new-org-12345345/clean/issues/1/lock \
             -d '{"lock_reason":"off-topic"}'
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: true
+        fetch-depth: 0
+    - name: Commit files
+      run: |
+        git config --local user.email "jawadneeme1@gmail.com"
+        git config --local user.name "jaowl2o1"
+        echo "test" >> README.md
+        git add .
+        git commit -a -m "Add changes"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
